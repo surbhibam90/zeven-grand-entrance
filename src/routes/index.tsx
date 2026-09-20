@@ -79,6 +79,10 @@ function ZevenHome() {
   const [selectedService, setSelectedService] = useState<(typeof services)[number] | null>(null);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [sent, setSent] = useState(false);
+  const visibleReviews = [
+    reviews[reviewIndex] ?? reviews[0],
+    reviews[(reviewIndex + 1) % reviews.length] ?? reviews[1],
+  ];
 
   const openBooking = (service?: (typeof services)[number]) => {
     setSelectedService(service ?? null);
@@ -182,7 +186,7 @@ function ZevenHome() {
                 <div className="flex gap-2"><Button variant="outline" size="icon" aria-label="Previous review" onClick={() => setReviewIndex((reviewIndex + reviews.length - 1) % reviews.length)} className="rounded-full"><ArrowLeft /></Button><Button variant="outline" size="icon" aria-label="Next review" onClick={() => setReviewIndex((reviewIndex + 1) % reviews.length)} className="rounded-full"><ArrowRight /></Button></div>
               </div>
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                {[reviews[reviewIndex], reviews[(reviewIndex + 1) % reviews.length]].map((review) => (
+                {visibleReviews.map((review) => (
                   <article key={review.name} className="border border-border bg-card p-7">
                     <span className="font-display text-5xl leading-none text-gold-deep">“</span><p className="min-h-24 text-sm leading-7 text-muted-foreground">{review.quote}</p>
                     <div className="mt-7 flex items-center gap-3"><span className="grid size-11 place-items-center rounded-full bg-primary font-display text-primary-foreground">{review.initials}</span><div><p className="text-sm font-semibold">{review.name}</p><div className="mt-1 flex text-gold-deep">{Array.from({ length: 5 }).map((_,i) => <Star key={i} className="size-3 fill-current" />)}</div></div></div>
