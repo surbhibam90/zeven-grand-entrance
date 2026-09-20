@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -32,6 +32,7 @@ import { Textarea } from "@/components/ui/textarea";
 import heroImage from "@/assets/zeven-hero.jpg";
 import academyImage from "@/assets/zeven-academy.jpg";
 import servicesImage from "@/assets/zeven-services.jpg";
+import skinTreatmentImage from "@/assets/zeven-skin-treatment.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,7 +54,7 @@ const services = [
   { name: "Nails", detail: "Manicure, extensions & nail art", price: "From ₹699", duration: "45–90 min" },
   { name: "Makeup", detail: "Occasion and bridal artistry", price: "From ₹2,499", duration: "60–150 min" },
   { name: "Mehndi", detail: "Traditional and contemporary art", price: "From ₹999", duration: "60–180 min" },
-  { name: "Body Treatment", detail: "Restorative rituals and massage", price: "From ₹1,999", duration: "60–90 min" },
+  { name: "Skin Treatment", detail: "Gentle facial care, restorative serums and gua sha therapy", price: "From ₹1,999", duration: "60–90 min" },
 ];
 
 const reviews = [
@@ -79,10 +80,18 @@ function ZevenHome() {
   const [selectedService, setSelectedService] = useState<(typeof services)[number] | null>(null);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [sent, setSent] = useState(false);
+  const [headerScrolled, setHeaderScrolled] = useState(false);
   const visibleReviews = [
     reviews[reviewIndex] ?? reviews[0],
     reviews[(reviewIndex + 1) % reviews.length] ?? reviews[1],
   ];
+
+  useEffect(() => {
+    const updateHeader = () => setHeaderScrolled(window.scrollY > 36);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, []);
 
   const openBooking = (service?: (typeof services)[number]) => {
     setSelectedService(service ?? null);
@@ -98,17 +107,17 @@ function ZevenHome() {
 
   return (
     <main className="overflow-hidden bg-background text-foreground">
-      <section id="home" className="relative min-h-[760px] bg-hero md:min-h-[820px]">
-        <img src={heroImage} alt="A guest enjoying a luxury Zeven hair spa ritual" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover object-[67%_center]" />
+      <section id="home" className="relative min-h-screen bg-hero">
+        <div aria-hidden="true" className="absolute inset-0 bg-cover bg-fixed bg-[position:67%_center]" style={{ backgroundImage: `url(${heroImage})` }} />
         <div className="absolute inset-0 bg-hero-overlay" />
-        <header className="relative z-20 mx-auto grid max-w-[1440px] grid-cols-[auto_1fr_auto] items-center px-5 py-6 text-hero-foreground md:px-10 lg:px-16">
+        <header className={`fixed left-0 right-0 top-0 z-50 grid grid-cols-[auto_1fr_auto] items-center border-b px-5 py-4 transition-[background-color,border-color,box-shadow] duration-300 md:px-10 lg:px-16 ${headerScrolled ? "border-gold/25 bg-primary/95 text-primary-foreground shadow-lg backdrop-blur-xl" : "border-transparent bg-transparent text-hero-foreground"}`}>
           <nav className="hidden items-center gap-7 text-xs lg:flex"><a href="#services">Services</a><a href="#academy">Academy</a><a href="#gallery">Gallery</a></nav>
           <div className="justify-self-center"><Brand light /></div>
           <nav className="hidden items-center justify-self-end gap-6 text-xs lg:flex"><a href="#about">About</a><a href="#contact">Contact</a><Button onClick={() => openBooking()} className="h-11 rounded-full border border-gold/60 bg-primary/80 px-6 text-xs hover:bg-primary">Book Appointment <ArrowRight /></Button></nav>
           <Button variant="ghost" size="icon" aria-label="Open menu" onClick={() => setMenuOpen(true)} className="justify-self-end rounded-full border border-hero-foreground/40 text-hero-foreground lg:hidden"><Menu /></Button>
         </header>
 
-        <div className="relative z-10 mx-auto flex min-h-[650px] max-w-[1440px] items-center px-5 pb-20 md:px-10 lg:px-16">
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-[1440px] items-center px-5 pb-20 pt-24 md:px-10 lg:px-16">
           <div className="max-w-xl pt-12 text-hero-foreground md:pt-0">
             <p className="kicker text-gold-light">SELF CARE · EXPERT CARE</p>
             <h1 className="mt-7 font-display text-6xl leading-[0.88] sm:text-7xl md:text-8xl">Relax<br />Rejuvenate<br />Be You</h1>
@@ -163,7 +172,7 @@ function ZevenHome() {
             {services.map((service, index) => (
               <article key={service.name} className="group min-w-0">
                 <button onClick={() => setSelectedService(service)} className="block w-full text-left">
-                  <div className="aspect-[0.78] overflow-hidden rounded-t-[999px] bg-muted"><img src={servicesImage} alt={service.name} width={1808} height={1008} loading="lazy" className="h-full w-[600%] max-w-none object-cover transition-transform duration-500 group-hover:scale-[1.03]" style={{ transform: `translateX(-${index * (100 / 6)}%)` }} /></div>
+                  <div className="aspect-[0.78] overflow-hidden rounded-t-[999px] bg-muted">{service.name === "Skin Treatment" ? <img src={skinTreatmentImage} alt="Luxury skin serums, jade roller and gua sha treatment tools" width={1024} height={1365} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" /> : <img src={servicesImage} alt={service.name} width={1808} height={1008} loading="lazy" className="h-full w-[600%] max-w-none object-cover transition-transform duration-500 group-hover:scale-[1.03]" style={{ transform: `translateX(-${index * (100 / 6)}%)` }} />}</div>
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-border py-4"><span className="truncate text-sm font-medium">{service.name}</span><span className="grid size-8 shrink-0 place-items-center rounded-full border border-gold-deep"><ArrowRight className="size-3" /></span></div>
                 </button>
               </article>
@@ -215,7 +224,7 @@ function ZevenHome() {
         <div className="mx-auto flex max-w-[1320px] flex-col gap-4 pt-7 text-[0.65rem] tracking-wide text-muted-foreground md:flex-row md:items-center md:justify-between"><span>© 2025 Zeven Salon & Academy. All rights reserved.</span><span className="tracking-[0.2em]">MAKING BEAUTY A BETTER TOMORROW —</span></div>
       </footer>
 
-      {menuOpen && <div className="fixed inset-0 z-50 bg-primary p-6 text-primary-foreground lg:hidden"><div className="flex items-center justify-between"><Brand light /><Button variant="ghost" size="icon" aria-label="Close menu" onClick={() => setMenuOpen(false)} className="text-primary-foreground"><X /></Button></div><nav className="mt-20 grid gap-7 font-display text-4xl">{[['Services','#services'],['Academy','#academy'],['Gallery','#gallery'],['About','#about'],['Contact','#contact']].map(([label,href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><Button onClick={() => { setMenuOpen(false); openBooking(); }} className="mt-12 rounded-full bg-gold text-primary">Book Appointment <ArrowRight /></Button></div>}
+      {menuOpen && <div className="fixed inset-0 z-[60] bg-primary p-6 text-primary-foreground lg:hidden"><div className="flex items-center justify-between"><Brand light /><Button variant="ghost" size="icon" aria-label="Close menu" onClick={() => setMenuOpen(false)} className="text-primary-foreground"><X /></Button></div><nav className="mt-20 grid gap-7 font-display text-4xl">{[['Services','#services'],['Academy','#academy'],['Gallery','#gallery'],['About','#about'],['Contact','#contact']].map(([label,href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><Button onClick={() => { setMenuOpen(false); openBooking(); }} className="mt-12 rounded-full bg-gold text-primary">Book Appointment <ArrowRight /></Button></div>}
 
       <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} service={selectedService?.name} sent={sent} onSubmit={submit} />
       <Dialog open={academyOpen} onOpenChange={setAcademyOpen}><DialogContent className="max-h-[90vh] overflow-y-auto"><DialogHeader><DialogTitle className="font-display text-3xl">Begin your beauty career</DialogTitle><DialogDescription>Tell us what you want to learn. Our academy advisor will contact you.</DialogDescription></DialogHeader><form onSubmit={submit} className="grid gap-4"><select required aria-label="Course" className="h-11 rounded-md border border-input bg-background px-3 text-sm"><option value="">Select a course</option><option>Professional Makeup</option><option>Hair Artistry</option><option>Nail Technology</option><option>Complete Cosmetology</option></select><Input required maxLength={100} placeholder="Full name" /><Input required type="tel" maxLength={20} placeholder="Phone number" /><Input required type="email" maxLength={255} placeholder="Email address" /><Textarea maxLength={500} placeholder="Tell us about your goals" /><Button type="submit" className="h-11 rounded-full">Send Admission Inquiry</Button>{sent && <p className="flex items-center gap-2 text-sm text-success"><CheckCircle2 className="size-4" />Thank you. Our academy team will be in touch.</p>}</form></DialogContent></Dialog>
