@@ -4,7 +4,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Award,
-  BookOpen,
   CheckCircle2,
   GraduationCap,
   Instagram,
@@ -61,7 +60,7 @@ const reviews = [
   { quote: "Amazing service and such a relaxing experience! The team is so professional and friendly. Truly the best salon in town.", name: "Priya S.", initials: "PS" },
   { quote: "Loved my bridal makeup! The staff understood exactly what I wanted. I will definitely visit again!", name: "Riddhi M.", initials: "RM" },
   { quote: "The academy gave me confidence, real practice and the skills to begin my own beauty career.", name: "Mahi P.", initials: "MP" },
-];
+] as const;
 
 function Brand({ light = false }: { light?: boolean }) {
   return (
@@ -226,6 +225,6 @@ function FooterList({ title, items }: { title: string; items: string[] }) {
   return <div><h3 className="text-sm font-semibold">{title}</h3><ul className="mt-5 space-y-3 text-xs text-muted-foreground">{items.map(item => <li key={item}><a href={item === 'Home' ? '#home' : `#${item.toLowerCase().replace(' us','').replace(' policy','')}`}>{item}</a></li>)}</ul></div>;
 }
 
-function BookingDialog({ open, onOpenChange, service, sent, onSubmit }: { open: boolean; onOpenChange: (open: boolean) => void; service?: string; sent: boolean; onSubmit: (event: FormEvent<HTMLFormElement>) => void }) {
+function BookingDialog({ open, onOpenChange, service, sent, onSubmit }: { open: boolean; onOpenChange: (open: boolean) => void; service: string | undefined; sent: boolean; onSubmit: (event: FormEvent<HTMLFormElement>) => void }) {
   return <Dialog open={open} onOpenChange={onOpenChange}><DialogContent className="max-h-[92vh] overflow-y-auto"><DialogHeader><DialogTitle className="font-display text-3xl">Book your appointment</DialogTitle><DialogDescription>Choose your ritual and preferred time. We’ll confirm your appointment by phone.</DialogDescription></DialogHeader><form onSubmit={onSubmit} className="grid gap-4"><label className="grid gap-1.5 text-xs font-semibold">Service<select required defaultValue={service ?? ''} className="h-11 rounded-md border border-input bg-background px-3 text-sm font-normal"><option value="">Select a service</option>{services.map(item => <option key={item.name}>{item.name}</option>)}</select></label><div className="grid grid-cols-2 gap-3"><label className="grid gap-1.5 text-xs font-semibold">Date<Input required type="date" className="h-11 font-normal" /></label><label className="grid gap-1.5 text-xs font-semibold">Time<select required className="h-11 rounded-md border border-input bg-background px-3 text-sm font-normal"><option value="">Select</option><option>10:00 AM</option><option>12:30 PM</option><option>3:00 PM</option><option>5:30 PM</option></select></label></div><label className="grid gap-1.5 text-xs font-semibold">Stylist preference<select className="h-11 rounded-md border border-input bg-background px-3 text-sm font-normal"><option>No preference</option><option>Senior stylist</option><option>Female stylist</option></select></label><Input required maxLength={100} placeholder="Full name" /><Input required type="tel" maxLength={20} placeholder="Phone number" /><Input required type="email" maxLength={255} placeholder="Email address" /><Button type="submit" className="h-11 rounded-full">Request Appointment <ArrowRight /></Button>{sent && <p className="flex items-center gap-2 text-sm text-success"><CheckCircle2 className="size-4" />Request received. We’ll call to confirm shortly.</p>}</form></DialogContent></Dialog>;
 }
