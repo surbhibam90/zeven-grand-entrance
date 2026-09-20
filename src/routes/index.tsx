@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowLeft,
@@ -111,7 +111,7 @@ function ZevenHome() {
         <div aria-hidden="true" className="absolute inset-0 bg-cover bg-fixed bg-[position:67%_center]" style={{ backgroundImage: `url(${heroImage})` }} />
         <div className="absolute inset-0 bg-hero-overlay" />
         <header className={`fixed left-0 right-0 top-0 z-50 grid grid-cols-[auto_1fr_auto] items-center border-b px-5 py-4 transition-[background-color,border-color,box-shadow] duration-300 md:px-10 lg:px-16 ${headerScrolled ? "border-gold/25 bg-primary/95 text-primary-foreground shadow-lg backdrop-blur-xl" : "border-transparent bg-transparent text-hero-foreground"}`}>
-          <nav className="hidden items-center gap-7 text-xs lg:flex"><a href="#services">Services</a><a href="#academy">Academy</a><a href="#gallery">Gallery</a></nav>
+          <nav className="hidden items-center gap-7 text-xs lg:flex"><a href="#services">Services</a><a href="#academy">Academy</a><Link to="/gallery">Gallery</Link></nav>
           <div className="justify-self-center"><Brand light /></div>
           <nav className="hidden items-center justify-self-end gap-6 text-xs lg:flex"><a href="#about">About</a><a href="#contact">Contact</a><Button onClick={() => openBooking()} className="h-11 rounded-full border border-gold/60 bg-primary/80 px-6 text-xs hover:bg-primary">Book Appointment <ArrowRight /></Button></nav>
           <Button variant="ghost" size="icon" aria-label="Open menu" onClick={() => setMenuOpen(true)} className="justify-self-end rounded-full border border-hero-foreground/40 text-hero-foreground lg:hidden"><Menu /></Button>
@@ -224,7 +224,7 @@ function ZevenHome() {
         <div className="mx-auto flex max-w-[1320px] flex-col gap-4 pt-7 text-[0.65rem] tracking-wide text-muted-foreground md:flex-row md:items-center md:justify-between"><span>© 2025 Zeven Salon & Academy. All rights reserved.</span><span className="tracking-[0.2em]">MAKING BEAUTY A BETTER TOMORROW —</span></div>
       </footer>
 
-      {menuOpen && <div className="fixed inset-0 z-[60] bg-primary p-6 text-primary-foreground lg:hidden"><div className="flex items-center justify-between"><Brand light /><Button variant="ghost" size="icon" aria-label="Close menu" onClick={() => setMenuOpen(false)} className="text-primary-foreground"><X /></Button></div><nav className="mt-20 grid gap-7 font-display text-4xl">{[['Services','#services'],['Academy','#academy'],['Gallery','#gallery'],['About','#about'],['Contact','#contact']].map(([label,href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><Button onClick={() => { setMenuOpen(false); openBooking(); }} className="mt-12 rounded-full bg-gold text-primary">Book Appointment <ArrowRight /></Button></div>}
+      {menuOpen && <div className="fixed inset-0 z-[60] bg-primary p-6 text-primary-foreground lg:hidden"><div className="flex items-center justify-between"><Brand light /><Button variant="ghost" size="icon" aria-label="Close menu" onClick={() => setMenuOpen(false)} className="text-primary-foreground"><X /></Button></div><nav className="mt-20 grid gap-7 font-display text-4xl">{[['Services','#services'],['Academy','#academy'],['Gallery','/gallery'],['About','#about'],['Contact','#contact']].map(([label,href]) => href === '/gallery' ? <Link key={label} to="/gallery" onClick={() => setMenuOpen(false)}>{label}</Link> : <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><Button onClick={() => { setMenuOpen(false); openBooking(); }} className="mt-12 rounded-full bg-gold text-primary">Book Appointment <ArrowRight /></Button></div>}
 
       <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} service={selectedService?.name} sent={sent} onSubmit={submit} />
       <Dialog open={academyOpen} onOpenChange={setAcademyOpen}><DialogContent className="max-h-[90vh] overflow-y-auto"><DialogHeader><DialogTitle className="font-display text-3xl">Begin your beauty career</DialogTitle><DialogDescription>Tell us what you want to learn. Our academy advisor will contact you.</DialogDescription></DialogHeader><form onSubmit={submit} className="grid gap-4"><select required aria-label="Course" className="h-11 rounded-md border border-input bg-background px-3 text-sm"><option value="">Select a course</option><option>Professional Makeup</option><option>Hair Artistry</option><option>Nail Technology</option><option>Complete Cosmetology</option></select><Input required maxLength={100} placeholder="Full name" /><Input required type="tel" maxLength={20} placeholder="Phone number" /><Input required type="email" maxLength={255} placeholder="Email address" /><Textarea maxLength={500} placeholder="Tell us about your goals" /><Button type="submit" className="h-11 rounded-full">Send Admission Inquiry</Button>{sent && <p className="flex items-center gap-2 text-sm text-success"><CheckCircle2 className="size-4" />Thank you. Our academy team will be in touch.</p>}</form></DialogContent></Dialog>
@@ -235,7 +235,7 @@ function ZevenHome() {
 }
 
 function FooterList({ title, items }: { title: string; items: string[] }) {
-  return <div><h3 className="text-sm font-semibold">{title}</h3><ul className="mt-5 space-y-3 text-xs text-muted-foreground">{items.map(item => <li key={item}><a href={item === 'Home' ? '#home' : `#${item.toLowerCase().replace(' us','').replace(' policy','')}`}>{item}</a></li>)}</ul></div>;
+  return <div><h3 className="text-sm font-semibold">{title}</h3><ul className="mt-5 space-y-3 text-xs text-muted-foreground">{items.map(item => <li key={item}>{item === 'Gallery' ? <Link to="/gallery">Gallery</Link> : <a href={item === 'Home' ? '#home' : `#${item.toLowerCase().replace(' us','').replace(' policy','')}`}>{item}</a>}</li>)}</ul></div>;
 }
 
 function BookingDialog({ open, onOpenChange, service, sent, onSubmit }: { open: boolean; onOpenChange: (open: boolean) => void; service: string | undefined; sent: boolean; onSubmit: (event: FormEvent<HTMLFormElement>) => void }) {
