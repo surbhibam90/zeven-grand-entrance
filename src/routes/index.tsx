@@ -110,7 +110,7 @@ function ZevenHome() {
       <section id="home" className="relative min-h-screen bg-hero">
         <div aria-hidden="true" className="absolute inset-0 bg-cover bg-fixed bg-[position:67%_center]" style={{ backgroundImage: `url(${heroImage})` }} />
         <div className="absolute inset-0 bg-hero-overlay" />
-        <header className={`fixed left-0 right-0 top-0 z-50 grid grid-cols-[auto_1fr_auto] items-center border-b px-5 py-4 transition-[background-color,border-color,box-shadow] duration-300 md:px-10 lg:px-16 ${headerScrolled ? "border-gold/25 bg-primary/45 text-primary-foreground shadow-lg backdrop-blur-xl" : "border-transparent bg-transparent text-hero-foreground"}`}>
+        <header className={`fixed left-0 right-0 top-0 z-50 grid grid-cols-[auto_1fr_auto] items-center border-b px-5 py-4 transition-[background-color,border-color,box-shadow] duration-300 md:px-10 lg:px-16 ${headerScrolled ? "border-gold/25 bg-primary/50 text-primary-foreground shadow-lg backdrop-blur-xl" : "border-transparent bg-transparent text-hero-foreground"}`}>
           <nav className="hidden items-center gap-7 text-sm lg:flex">
             <a href="#academy">Academy</a>
             <a href="#services">Services</a>
