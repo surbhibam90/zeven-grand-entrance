@@ -63,6 +63,14 @@ const reviews = [
   { quote: "The academy gave me confidence, real practice and the skills to begin my own beauty career.", name: "Mahi P.", initials: "MP" },
 ] as const;
 
+const heroSlides = [
+  { src: heroImage, position: "67% center" },
+  { src: skinTreatmentImage, position: "50% 30%" },
+  { src: heroImage, position: "22% center" },
+  { src: academyImage, position: "center 18%" },
+  { src: heroImage, position: "60% 80%" },
+];
+
 function Brand({ light = false }: { light?: boolean }) {
   return (
     <a href="#home" className={light ? "text-hero-foreground" : "text-primary"} aria-label="Zeven home">
@@ -81,6 +89,7 @@ function ZevenHome() {
   const [reviewIndex, setReviewIndex] = useState(0);
   const [sent, setSent] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
   const visibleReviews = [
     reviews[reviewIndex] ?? reviews[0],
     reviews[(reviewIndex + 1) % reviews.length] ?? reviews[1],
@@ -92,6 +101,11 @@ function ZevenHome() {
     window.addEventListener("scroll", updateHeader, { passive: true });
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSlideIndex((slideIndex + 1) % heroSlides.length), 6000);
+    return () => clearTimeout(timer);
+  }, [slideIndex]);
 
   const openBooking = (service?: (typeof services)[number]) => {
     setSelectedService(service ?? null);
@@ -108,7 +122,11 @@ function ZevenHome() {
   return (
     <main className="overflow-hidden bg-background text-foreground">
       <section id="home" className="relative min-h-screen bg-hero">
-        <div aria-hidden="true" className="absolute inset-0 bg-cover bg-fixed bg-[position:67%_center]" style={{ backgroundImage: `url(${heroImage})` }} />
+        <div aria-hidden="true" className="absolute inset-0">
+          {heroSlides.map((slide, index) => (
+            <div key={index} className={`absolute inset-0 bg-cover bg-fixed transition-opacity duration-1000 ease-in-out ${index === slideIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `url(${slide.src})`, backgroundPosition: slide.position }} />
+          ))}
+        </div>
         <div className="absolute inset-0 bg-hero-overlay" />
         <header className={`fixed left-0 right-0 top-0 z-50 grid grid-cols-[auto_1fr_auto] items-center border-b px-5 py-4 transition-[background-color,border-color,box-shadow] duration-300 md:px-10 lg:px-16 ${headerScrolled ? "border-gold/25 bg-primary/45 text-primary-foreground shadow-lg backdrop-blur-xl" : "border-transparent bg-transparent text-hero-foreground"}`}>
           <nav className="hidden items-center gap-7 text-sm lg:flex">
@@ -131,11 +149,11 @@ function ZevenHome() {
               <Button onClick={() => openBooking()} className="h-12 rounded-full bg-gold px-7 text-primary hover:bg-gold-light">Book Appointment <ArrowRight /></Button>
               <Button variant="ghost" onClick={() => setStoryOpen(true)} className="h-12 rounded-full px-3 text-hero-foreground hover:bg-hero-foreground/10 hover:text-hero-foreground"><span className="grid size-10 place-items-center rounded-full border border-hero-foreground/60"><Play className="ml-0.5" /></span> Watch Our Story</Button>
             </div>
-            <div className="mt-12 flex items-center gap-3 text-[0.65rem] tracking-[0.18em]"><span>01</span><span>/</span><span>03</span><span className="h-px w-20 bg-hero-foreground/60" /></div>
+            <div className="mt-12 flex items-center gap-3 text-[0.65rem] tracking-[0.18em]"><span>{String(slideIndex + 1).padStart(2, "0")}</span><span>/</span><span>{String(heroSlides.length).padStart(2, "0")}</span><div className="flex items-center gap-2">{heroSlides.map((_, index) => <button key={index} type="button" aria-label={`Go to slide ${index + 1}`} onClick={() => setSlideIndex(index)} className={`h-px transition-all duration-300 ${index === slideIndex ? "w-8 bg-gold" : "w-4 bg-hero-foreground/50 hover:bg-hero-foreground"}`} />)}</div></div>
           </div>
         </div>
         <div className="absolute bottom-16 right-5 z-10 hidden border-r border-hero-foreground/50 pr-4 text-right text-[0.65rem] font-semibold tracking-[0.28em] text-hero-foreground md:block lg:right-12">
-          {['HAIR','SKIN','NAILS','MAKEUP','MEHNDI'].map((item, index) => <div key={item} className={index === 0 ? "py-1 text-gold-light" : "py-1 opacity-70"}>{item}</div>)}
+          {['HAIR','SKIN','NAILS','MAKEUP','MEHNDI'].map((item, index) => <div key={item} className={`py-1 transition-colors duration-500 ${index === slideIndex ? "text-gold-light" : "opacity-70"}`}>{item}</div>)}
         </div>
       </section>
 
