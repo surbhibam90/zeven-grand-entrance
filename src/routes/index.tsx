@@ -30,6 +30,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import heroImage from "@/assets/zeven-hero.jpg";
+import heroBridalImage from "@/assets/zeven-hero-bridal.jpg";
+import heroFacialImage from "@/assets/zeven-hero-facial.jpg";
+import heroHairImage from "@/assets/zeven-hero-hair.jpg";
+import heroMehndiImage from "@/assets/zeven-hero-mehndi.jpg";
+import heroNailsImage from "@/assets/zeven-hero-nails.jpg";
 import academyImage from "@/assets/zeven-academy.jpg";
 import servicesImage from "@/assets/zeven-services.jpg";
 import skinTreatmentImage from "@/assets/zeven-skin-treatment.jpg";
@@ -37,8 +42,8 @@ import skinTreatmentImage from "@/assets/zeven-skin-treatment.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Zeven Salon · Studio · Academy | Jamnagar" },
-      { name: "description", content: "Luxury salon services and professional beauty education in Jamnagar, Gujarat." },
+      { title: "Zeven Salon · Studio · Academy | Ahmedabad" },
+      { name: "description", content: "Luxury salon services and professional beauty education in Ahmedabad, Gujarat." },
       { property: "og:title", content: "Zeven Salon · Studio · Academy" },
       { property: "og:description", content: "Expert care for your hair, skin, nails and more — because you deserve the best." },
       { property: "og:type", content: "website" },
@@ -64,11 +69,12 @@ const reviews = [
 ] as const;
 
 const heroSlides = [
-  { src: heroImage, position: "67% center" },
-  { src: skinTreatmentImage, position: "50% 30%" },
-  { src: heroImage, position: "22% center" },
-  { src: academyImage, position: "center 18%" },
-  { src: heroImage, position: "60% 80%" },
+  { src: heroImage, position: "60% center" },
+  { src: heroFacialImage, position: "60% center" },
+  { src: heroNailsImage, position: "50% center" },
+  { src: heroBridalImage, position: "center 18%" },
+  { src: heroMehndiImage, position: "40% center" },
+  { src: heroHairImage, position: "40% 20%" },
 ];
 
 function Brand({ light = false }: { light?: boolean }) {
@@ -139,7 +145,7 @@ function ZevenHome() {
           <Button variant="ghost" size="icon" aria-label="Open menu" onClick={() => setMenuOpen(true)} className="justify-self-end rounded-full border border-hero-foreground/40 text-hero-foreground lg:hidden"><Menu /></Button>
         </header>
 
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-[1440px] items-center px-5 pb-20 pt-24 md:px-10 lg:px-16">
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-[1640px] items-center px-5 pb-20 pt-24 md:px-10 lg:px-16">
           <div className="max-w-xl pt-12 text-hero-foreground md:pt-0">
             <p className="kicker text-gold-light">SELF CARE · EXPERT CARE</p>
             <h1 className="mt-7 font-display text-6xl leading-[0.88] sm:text-7xl md:text-8xl">Relax<br />Rejuvenate<br />Be You</h1>
@@ -241,7 +247,7 @@ function ZevenHome() {
           <FooterList title="Quick Links" items={['Home','Services','Academy','Gallery']} />
           <FooterList title="About" items={['About Us','Contact','Privacy Policy','Terms']} />
           <div><h3 className="text-sm font-semibold">Follow Us</h3><div className="mt-6 flex gap-4"><Instagram className="size-4" /><span className="font-bold">f</span><Youtube className="size-4" /><MessageCircle className="size-4" /></div></div>
-          <div id="contact" className="space-y-4 text-sm text-muted-foreground"><p className="flex gap-3"><MapPin className="size-4 shrink-0 text-primary" />Jamnagar, Gujarat</p><p className="flex gap-3"><Phone className="size-4 shrink-0 text-primary" />+91 98765 43210</p><p className="flex min-w-0 gap-3"><Mail className="size-4 shrink-0 text-primary" /><span className="break-all">info@zevensalonacademy.com</span></p></div>
+          <div id="contact" className="space-y-4 text-sm text-muted-foreground"><p className="flex gap-3"><MapPin className="size-4 shrink-0 text-primary" />Ahmedabad, Gujarat</p><p className="flex gap-3"><Phone className="size-4 shrink-0 text-primary" />+91 98765 43210</p><p className="flex min-w-0 gap-3"><Mail className="size-4 shrink-0 text-primary" /><span className="break-all">info@zevensalonacademy.com</span></p></div>
         </div>
         <div className="mx-auto flex max-w-[1320px] flex-col gap-4 pt-7 text-[0.65rem] tracking-wide text-muted-foreground md:flex-row md:items-center md:justify-between"><span>© 2025 Zeven Salon & Academy. All rights reserved.</span><span className="tracking-[0.2em]">MAKING BEAUTY A BETTER TOMORROW —</span></div>
       </footer>

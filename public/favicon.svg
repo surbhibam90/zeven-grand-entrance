@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Zeven salon brand mark">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a1f2b"/>
+      <stop offset="100%" stop-color="#1a1417"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f4d7a1"/>
+      <stop offset="100%" stop-color="#d4af6d"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#bg)"/>
+  <path d="M18 17h30l-15 15 15 15H18l15-15-15-15Z" fill="url(#gold)" opacity="0.96"/>
+  <path d="M25 18h12l-9 14h9l-11 14H14l9-14H14l11-14Z" fill="#fffaf0" opacity="0.9"/>
+</svg>

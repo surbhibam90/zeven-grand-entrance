@@ -12,7 +12,7 @@ export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
       { title: "Gallery | Zeven Salon · Studio · Academy" },
-      { name: "description", content: "Explore hair, skincare, makeup, nail, mehndi and academy work by Zeven in Jamnagar." },
+      { name: "description", content: "Explore hair, skincare, makeup, nail, mehndi and academy work by Zeven in Ahmedabad." },
       { property: "og:title", content: "The Zeven Gallery" },
       { property: "og:description", content: "A curated collection of beauty transformations and student artistry from Zeven." },
       { property: "og:type", content: "website" },
@@ -120,7 +120,7 @@ function GalleryPage() {
         <Link to="/" hash="home" className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-gold px-7 text-sm font-semibold text-primary">Book an Appointment <ArrowRight className="size-4" /></Link>
       </section>
 
-      <footer className="bg-background px-5 py-8 text-center text-xs text-muted-foreground">© 2025 Zeven Salon & Academy · Jamnagar, Gujarat</footer>
+      <footer className="bg-background px-5 py-8 text-center text-xs text-muted-foreground">© 2025 Zeven Salon & Academy · Ahmedabad, Gujarat</footer>
 
       <Dialog open={selectedItem !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
         <DialogContent className="max-h-[94vh] overflow-hidden border-gold/30 bg-primary p-0 text-primary-foreground sm:max-w-5xl [&>button]:hidden">

@@ -10,9 +10,9 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact Us | Zeven Salon · Studio · Academy" },
-      { name: "description", content: "Visit, call or message Zeven Salon, Studio & Academy in Jamnagar, Gujarat — we would love to hear from you." },
+      { name: "description", content: "Visit, call or message Zeven Salon, Studio & Academy in Ahmedabad, Gujarat — we would love to hear from you." },
       { property: "og:title", content: "Contact Zeven Salon · Studio · Academy" },
-      { property: "og:description", content: "Questions, bookings or academy inquiries — our team in Jamnagar is ready to help." },
+      { property: "og:description", content: "Questions, bookings or academy inquiries — our team in Ahmedabad is ready to help." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const details = [
-  { icon: MapPin, label: "Visit Us", value: "Jamnagar, Gujarat", href: undefined as string | undefined },
+  { icon: MapPin, label: "Visit Us", value: "Ahmedabad, Gujarat", href: undefined as string | undefined },
   { icon: Phone, label: "Call Us", value: "+91 98765 43210", href: "tel:+919876543210" },
   { icon: Mail, label: "Email Us", value: "info@zevensalonacademy.com", href: "mailto:info@zevensalonacademy.com" },
   { icon: Clock, label: "Open Hours", value: "Mon–Sun · 10:00 AM – 8:00 PM", href: undefined },
@@ -64,7 +64,7 @@ function ContactPage() {
       <section className="border-b border-border px-5 pb-12 pt-16 text-center md:px-10 md:pb-16 md:pt-20">
         <p className="kicker">GET IN TOUCH</p>
         <h1 className="mx-auto mt-5 max-w-4xl font-display text-6xl leading-none md:text-8xl">We'd love to hear from you</h1>
-        <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-muted-foreground">Questions, bookings or academy inquiries — our team in Jamnagar is always happy to help.</p>
+        <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-muted-foreground">Questions, bookings or academy inquiries — our team in Ahmedabad is always happy to help.</p>
       </section>
 
       <section className="px-5 py-16 md:px-10 lg:px-16">
@@ -132,7 +132,7 @@ function ContactPage() {
         <Link to="/" hash="home" className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-gold px-7 text-sm font-semibold text-primary">Book an Appointment <ArrowRight className="size-4" /></Link>
       </section>
 
-      <footer className="bg-background px-5 py-8 text-center text-xs text-muted-foreground">© 2025 Zeven Salon & Academy · Jamnagar, Gujarat</footer>
+      <footer className="bg-background px-5 py-8 text-center text-xs text-muted-foreground">© 2025 Zeven Salon & Academy · Ahmedabad, Gujarat</footer>
     </main>
   );
 }

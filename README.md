@@ -68,7 +68,7 @@ Build a luxury salon, studio, and academy website matching the provided design m
    - Quick Links: Home, Services, Academy, Gallery.
    - About: About Us, Contact, Privacy Policy, Terms.
    - Social channels: Instagram, Facebook, YouTube, WhatsApp.
-   - Contact details: Jamnagar, Gujarat | +91 98765 43210 | info@zevensalonacademy.com.
+   - Contact details: Ahmedabad, Gujarat | +91 98765 43210 | info@zevensalonacademy.com.
    - Copyright: "© 2025 Zeven Salon & Academy. All rights reserved." and "MAKING BEAUTY A BETTER TOMORROW —".
 
 Make it responsive across mobile, tablet, and desktop, with interactive modals for booking and academy inquiries.

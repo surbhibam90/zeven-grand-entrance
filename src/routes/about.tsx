@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Us | Zeven Salon · Studio · Academy" },
-      { name: "description", content: "The story, values and people behind Zeven Salon, Studio & Academy in Jamnagar, Gujarat." },
+      { name: "description", content: "The story, values and people behind Zeven Salon, Studio & Academy in Ahmedabad, Gujarat." },
       { property: "og:title", content: "About Zeven Salon · Studio · Academy" },
       { property: "og:description", content: "A quiet space where expert artistry, warm care and your individuality come together." },
       { property: "og:type", content: "website" },
@@ -26,7 +26,7 @@ const values = [
 ];
 
 const milestones = [
-  { year: "2019", title: "The First Studio", text: "Zeven opens its doors in Jamnagar with a small team and a big promise — beauty beyond ordinary." },
+  { year: "2019", title: "The First Studio", text: "Zeven opens its doors in Ahmedabad with a small team and a big promise — beauty beyond ordinary." },
   { year: "2021", title: "The Academy", text: "We launch professional beauty courses, sharing our craft with the next generation of artists." },
   { year: "2023", title: "A Growing Family", text: "Our studio expands with dedicated skin, nail and mehndi ateliers under one elegant roof." },
   { year: "Today", title: "10,000+ Clients", text: "Thousands of clients and 1000+ trained students later, our promise remains exactly the same." },
@@ -70,10 +70,10 @@ function AboutPage() {
             <img src={heroImage} alt="A relaxing hair ritual at Zeven Salon" width={1920} height={1088} loading="lazy" className="aspect-[4/5] w-full object-cover" />
           </div>
           <div>
-            <p className="kicker">SINCE 2019 · JAMNAGAR</p>
+            <p className="kicker">SINCE 2019 · Ahmedabad</p>
             <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">Where self care becomes an art</h2>
             <div className="my-6 h-px w-10 bg-gold-deep" />
-            <p className="text-sm leading-7 text-muted-foreground">Zeven began with a simple belief: everyone deserves a place to slow down and feel their most beautiful. What started as a single studio in Jamnagar has grown into a full salon, studio and academy — yet every appointment still feels personal.</p>
+            <p className="text-sm leading-7 text-muted-foreground">Zeven began with a simple belief: everyone deserves a place to slow down and feel their most beautiful. What started as a single studio in Ahmedabad has grown into a full salon, studio and academy — yet every appointment still feels personal.</p>
             <p className="mt-4 text-sm leading-7 text-muted-foreground">From restorative hair rituals and bespoke facials to bridal artistry, nails and mehndi, our team blends timeless technique with modern style — always in a space that is elegant, welcoming and comfortably modest.</p>
             <blockquote className="mt-8 border-l-2 border-gold-deep pl-6 font-script text-3xl leading-tight text-primary">Beauty Beyond Ordinary ♥</blockquote>
           </div>
@@ -134,7 +134,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <footer className="bg-background px-5 py-8 text-center text-xs text-muted-foreground">© 2025 Zeven Salon & Academy · Jamnagar, Gujarat</footer>
+      <footer className="bg-background px-5 py-8 text-center text-xs text-muted-foreground">© 2025 Zeven Salon & Academy · Ahmedabad, Gujarat</footer>
     </main>
   );
 }
