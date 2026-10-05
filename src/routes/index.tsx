@@ -130,7 +130,15 @@ function ZevenHome() {
       <section id="home" className="relative min-h-screen bg-hero">
         <div aria-hidden="true" className="absolute inset-0">
           {heroSlides.map((slide, index) => (
-            <div key={index} className={`absolute inset-0 bg-cover bg-fixed transition-opacity duration-1000 ease-in-out ${index === slideIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `url(${slide.src})`, backgroundPosition: slide.position }} />
+            <img
+              key={index}
+              src={slide.src}
+              alt=""
+              aria-hidden="true"
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${index === slideIndex ? "opacity-100" : "opacity-0"}`}
+              style={{ objectPosition: slide.position }}
+              decoding="async"
+            />
           ))}
         </div>
         <div className="absolute inset-0 bg-hero-overlay" />

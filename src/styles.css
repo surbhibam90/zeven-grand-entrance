@@ -181,3 +181,15 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+@media (max-width: 767px) {
+  #home .absolute.inset-0 {
+    transform: translateZ(0);
+    will-change: opacity;
+    -webkit-transform: translateZ(0);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
